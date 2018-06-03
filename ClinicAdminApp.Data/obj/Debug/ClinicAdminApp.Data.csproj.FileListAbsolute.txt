@@ -1,0 +1,11 @@
+D:\Backups\ClinicAdminAppMVC\ClinicAdminAppMVC\ClinicAdminApp.Data\bin\Debug\ClinicAdminApp.Data.dll.config
+D:\Backups\ClinicAdminAppMVC\ClinicAdminAppMVC\ClinicAdminApp.Data\bin\Debug\ClinicAdminApp.Data.dll
+D:\Backups\ClinicAdminAppMVC\ClinicAdminAppMVC\ClinicAdminApp.Data\bin\Debug\ClinicAdminApp.Data.pdb
+D:\Backups\ClinicAdminAppMVC\ClinicAdminAppMVC\ClinicAdminApp.Data\bin\Debug\EntityFramework.dll
+D:\Backups\ClinicAdminAppMVC\ClinicAdminAppMVC\ClinicAdminApp.Data\bin\Debug\EntityFramework.SqlServer.dll
+D:\Backups\ClinicAdminAppMVC\ClinicAdminAppMVC\ClinicAdminApp.Data\bin\Debug\EntityFramework.xml
+D:\Backups\ClinicAdminAppMVC\ClinicAdminAppMVC\ClinicAdminApp.Data\bin\Debug\EntityFramework.SqlServer.xml
+D:\Backups\ClinicAdminAppMVC\ClinicAdminAppMVC\ClinicAdminApp.Data\obj\Debug\ClinicAdminApp.Data.csproj.CoreCompileInputs.cache
+D:\Backups\ClinicAdminAppMVC\ClinicAdminAppMVC\ClinicAdminApp.Data\obj\Debug\ClinicAdminApp.Data.dll
+D:\Backups\ClinicAdminAppMVC\ClinicAdminAppMVC\ClinicAdminApp.Data\obj\Debug\ClinicAdminApp.Data.pdb
+D:\Backups\ClinicAdminAppMVC\ClinicAdminAppMVC\ClinicAdminApp.Data\obj\Debug\ClinicAdminApp.Data.csprojResolveAssemblyReference.cache

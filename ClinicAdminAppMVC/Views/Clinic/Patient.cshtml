@@ -1,0 +1,60 @@
+﻿@using ClinicAdminApp.Data.Models
+@model System.Collections.Generic.List<spPatInfo_Result>
+@{
+    Layout = "~/Views/Shared/Clinicmaster.cshtml";
+}
+<head>
+    <link href="~/StyleSheet/layout.css" rel="stylesheet" />
+</head>
+<div style="margin-top:50px">
+    <form method="post">
+        <table border="0" style="border:solid darkslateblue; width:40% ;margin:auto">
+            <tr style="background-color:cornflowerblue; height:50px; font-size:30px">
+                <th colspan="2">Patient's Panel</th>
+            </tr>
+            <tr>
+                <th style="background-color:Highlight; height:40px">@Html.Label("Patient's Name")</th>
+                <td>@Html.DropDownList("DropDownPat",((List<SelectListItem>)TempData.Peek("DropDownPat")),new { Style= "width:98%; height:40px" }) </td>
+            </tr>
+            <tr>
+                <th colspan="2"><input type="submit" value="Search" style="font-weight:bold;height:30px ;border:none;background-color:midnightblue;color:white;border-radius:2px; width:80px " /></th>
+            </tr>
+        </table>
+    </form>
+
+    @if(Model!=null)
+    {
+        <table class="table-bordered table-responsive" style="border:solid darkslateblue 3px  ; width:70%; margin:auto; margin-top:50px; height:300px; color:darkblue">
+            <tr>
+                <th class="grid">ID</th>
+                <th class="grid">Patient Name</th>
+                <th class="grid">PatientID</th>
+                <th class="grid">DoctorID</th>
+
+                <th class="grid">Doctor Name</th>
+                <th class="grid">specialization</th>
+                <th class="grid">Availability</th>
+                <th class="grid">Diagonsis</th>
+                <th class="grid">Remarks</th>
+            </tr>
+          
+            @foreach (spPatInfo_Result item in Model)
+            {
+            <tr align="center">
+                <td>@item.ID</td>
+                <td>@item.PatientName</td>
+                <td>@item.PatientID</td>
+                <td>@item.DoctorID</td>
+
+                <td>@item.Doctorname</td>
+                <td>@item.Specialization</td>
+                <td>@item.Availability</td>
+                <td>@item.Diagonasis</td>
+                <td>@item.Remarks</td>
+            </tr>
+            }
+
+        </table>
+    }
+
+</div>

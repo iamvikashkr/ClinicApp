@@ -1,0 +1,65 @@
+﻿@{
+    Layout = "~/Views/Shared/Clinicmaster.cshtml";
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript"> 
+    $(document).ready(function () {
+
+        $("#appointment").on('click', function () {
+            $("#dialog").css("display", "normal");
+        });
+
+        $("#dialog").delay(3000).fadeOut();
+
+    });
+</script>
+<div style="margin-top:50px">
+    <form method="post">
+        <table border="0" style="border:solid darkslateblue; width:40% ;margin:auto">
+            <tr style="background-color:cornflowerblue; height:50px; font-size:30px">
+                <th colspan="2">Appointment Panel</th>
+            </tr>
+            <tr>
+                <th style="background-color:Highlight; height:40px">@Html.Label("Doctor's Name")</th>
+                <td>@Html.DropDownList("DocDetails", (List<SelectListItem>)TempData.Peek("DocDetails"), new { Style = "width:98%; height:40px" })</td>
+            </tr>
+            <tr>
+                <th style="background-color:Highlight; height:40px">@Html.Label("Patient's Name")</th>
+                <td>@Html.DropDownList("PatDetails", (List<SelectListItem>)TempData.Peek("PatDetails"), new { Style = "width:98%; height:40px" }) </td>
+            </tr>
+
+            <tr>
+                <th style="background-color:Highlight;height:40px "><label>Appointment Date</label></th>
+                <td>
+                    <input style="height:40px" type="date" name="AppDate" value="" />
+                </td>
+            </tr>
+            <tr style="background-color:Highlight; ">
+                <th colspan="2"><input type="submit" value="Take Appointment" id="appointment" style="font-weight:bold;height:30px ;border:none;background-color:midnightblue;color:white;border-radius:2px; width:200px " /></th>
+            </tr>
+        </table>
+    </form>
+</div>
+
+@if (Convert.ToString(TempData["data"]).Equals("success"))
+{
+    <div id="dialog" style="position:absolute; border-radius:3px; margin-top:-13%; margin-left:78%; height:60px; width:270px; background-color:cornflowerblue;">
+        <p style="position:absolute;color:white; font-size:20px; margin-left:15%; margin-top:3.5%; ">Appointment scheduled <br /> successfully.!!</p>
+    </div>
+}
+
+@if (Convert.ToString(TempData["data"]).Equals("error"))
+
+{
+    <div id="dialog" style="position:absolute; border-radius:3px; margin-top:-13%; margin-left:78%; height:60px; width:270px;background-color:cornflowerblue;opacity:0.8;">
+        <p style="position:absolute;color:white; font-size:18px; margin-left:15%;margin-top:3.5%; ">Some error has occured.!! <br /> Please try again</p>
+    </div>
+}
+
+@if (Convert.ToString(TempData["data"]).Equals("exception"))
+
+{
+    <div id="dialog" style="position:absolute; border-radius:3px; margin-top:-13%; margin-left:78%; height:60px; width:270px; background-color:cornflowerblue;opacity:0.8;">
+        <p style="position:absolute;color:white; font-size:18px; margin-left:15%;margin-top:3.5%; ">Appointment is full. Try  <br />another date</p>
+    </div>
+}

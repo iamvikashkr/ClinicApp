@@ -1,0 +1,142 @@
+﻿@using ClinicAdminApp.Data.Models
+@model System.Collections.Generic.List<spDocInfo_Result>
+@{
+    Layout = "~/Views/Shared/Clinicmaster.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="~/StyleSheet/layout.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Doctor</title>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/Script/Editing.js"></script>
+    @*<script type="text/javascript">
+            $(document).ready(function () {
+
+                edit();
+
+               // cancel();
+                function edit(id) {
+                    $("#edit ",id).show();
+                    $("#update ",id).hide();
+                    $("#cancel ",id).hide();
+
+                }
+                function display(id) {
+                    $("#edit ",id).hide();
+                    $("#update ",id).show();
+                    $("#cancel ",id).show();
+                }
+                function cancel(id) {
+                    $("#edit ", id).show();
+                    $("#update ", id).show();
+                    $("#cancel ", id).hide();
+                }
+                $("#edit").on('click', function () {
+                    display();
+                });
+                $("#cancel").on('click', function () {
+                    edit();
+                });
+
+            });
+        </script>*@
+
+</head>
+
+<body>
+    <div style="margin-top:50px">
+        <form method="post">
+            <table border="0" style="border:solid darkslateblue; width:40% ;margin:auto">
+                <tr style="background-color:cornflowerblue; height:50px; font-size:30px">
+                    <th colspan="2">Doctor's Panel</th>
+                </tr>
+                <tr>
+                    <th style="background-color:Highlight; height:40px">@Html.Label("Doctor's Name")</th>                    
+                      <td> @Html.DropDownList("DropDownDoc", (List<SelectListItem>)TempData.Peek("DropDownDoc"), new { Style = "width:98%; height:40px" })</td>                  
+                </tr>
+                <tr>
+                    <th colspan="2"><input type="submit" value="Search" style="font-weight:bold;height:30px ;border:none;background-color:midnightblue;color:white;border-radius:2px; width:80px " /></th>
+                </tr>
+            </table>
+        </form>
+
+        @if (Model != null)
+        {
+            <table class="table-bordered table-responsive "style="border:solid darkslateblue 3px ; width:80%; margin:auto; margin-top:50px; height:200px; color:darkblue">
+                <tr>
+                    <th class="grid">ID</th>
+                    <th class="grid">Doctor Name</th>
+                    <th class="grid">DoctorID</th>
+                    <th class="grid">PatientID</th>
+                    <th class="grid">Patient Name</th>
+                    <th class="grid">specialization</th>
+                    <th class="grid" style="width:150px">Availability</th>
+                    <th class="grid" style="width:100px">App Date</th>
+                    <th class="grid">Diagnosis</th>
+                    <th class="grid">Remarks</th>
+                    @if (Convert.ToInt16(Session["RoleID"]) == 2)
+                    {
+                        <th class="grid" style="width:150px">Action</th>
+                    }
+                </tr>
+
+                @if (Convert.ToInt16(Session["RoleID"]) == 2)
+                {
+
+                    foreach (spDocInfo_Result item in Model)
+                    {
+                        <tr align="center">
+                            <td>@Html.Label("ID", item.ID.ToString(),new { id="ID"+item.ID.ToString()})</td>
+                            <td>@item.Doctorname</td>
+                            <td>@Html.Label("DoctorID",item.DoctorID.ToString(),new { id="DoctorID"+item.DoctorID.ToString()})</td>
+                            <td>@Html.Label("PatientID",item.PatientID.ToString(), new { id = "PatientID" + item.PatientID.ToString() })</td>   
+                            <td>@item.PatientName</td>
+                            <td>@item.specialization</td>
+                            <td>@item.availability</td>
+                            <td>@Html.Label("Appointment Date",item.AppointmentDate.ToString(), new { id = "AppDate" + item.AppointmentDate.ToString() })</td>        
+                            <td>@Html.TextArea("Diagnosis", item.Diagonasis, new { id ="diagnosis"+item.ID.ToString(), disabled="dis"})</td>
+                            <td>@Html.TextArea("Remarks", item.Remarks, new {id="remarks"+item.ID.ToString(), disabled="dis"})</td>
+                            @if (Convert.ToInt16(Session["RoleID"]) == 2)
+                            {
+                                <td>
+                                    <div style="margin-bottom:4px">
+                                        <input type="submit" ; value="Edit" id="edit"@item.ID.ToString() onclick="Edit(@item.ID.ToString())" style="font-weight:bold;height:20px ;border:none;background-color:midnightblue;color:white;border-radius:2px; width:50px " />
+                                        <input type="submit" ; value="Update" id="update"@item.ID.ToString() onclick="Update(@item.ID.ToString())" style="font-weight:bold;height:20px ;border:none;background-color:midnightblue;color:white;border-radius:2px; width:60px " />
+                                    </div>
+                                    <div><input type="submit" ; value="Cancel"id="cancel"@item.ID.ToString() onclick="Cancel(@item.ID.ToString())" style="font-weight:bold;height:20px ;border:none;background-color:midnightblue;color:white;border-radius:2px; width:60px " /></div>
+                                </td>
+                            }
+                        </tr>
+                    }
+                }
+                else
+                {
+
+                    foreach (spDocInfo_Result item in Model)
+                    {
+                        <tr align="center">
+                            <td>@item.ID</td>
+                            <td>@item.Doctorname</td>
+                            <td>@item.DoctorID</td>
+                            <td>@item.PatientID</td>
+                            <td>@item.PatientName</td>
+                            <td>@item.specialization</td>
+                            <td>@item.availability</td>
+                            <td>@item.AppointmentDate</td>
+                            <td>@item.Diagonasis</td>
+                            <td>@item.Remarks</td>
+                           
+                        </tr>
+                    }
+                }
+
+
+            </table>
+        }
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,205 @@
+﻿
+@model ClinicAdminApp.Data.Models.tblRegister
+
+@{
+    Layout = "~/Views/Shared/Clinicmaster.cshtml";
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        admin();
+        function admin() {
+            $("#age").hide();
+            $("#availability").hide();
+            $("#specialization").hide();
+
+        }
+        $("#Admin").on('click', function () {
+            admin();
+        })
+        $("#Patient").on('click', function () {
+            admin();
+            $("#age").show();
+
+        })
+        $("#Doctor").on('click', function () {
+            admin();
+            $("#specialization").show();
+            $("#availability").show();
+
+        })
+
+        $("#register").on('click', function () {
+            $("#dialog").css("display", "normal");
+        })
+
+        $('#dialog').delay(3000).fadeOut();
+
+
+        //$("#FirstName").on('blur', function () {
+        //    $('#dialog').delay(30).fadeOut();
+        //})
+
+
+
+    });
+</script>
+
+
+
+<div style="margin-top:50px">
+    <form name="reg_form" method="post">
+
+        <table border="0" style="border:solid darkslateblue; width:40% ;margin:auto">
+            <tr style="background-color:cornflowerblue; height:50px; font-size:30px">
+                <th colspan="2" style="padding-left:150px">User Registration</th>
+            </tr>
+            <tr>
+                <th style="background-color:Highlight;">First Name</th>
+                <td>@Html.TextBoxFor(reg => reg.FirstName, new { Style = "width:98% ; height:26px" })</td>
+                @Html.ValidationMessageFor(reg => reg.FirstName, "", new { style = "position:absolute; margin-left:76%; margin-top:4.5%; color:red" })
+
+            </tr>
+            <tr>
+                <th style="background-color:Highlight;">Last Name</th>
+                <td>@Html.TextBoxFor(reg => reg.LastName, new { Style = "width:98% ; height:26px" })</td>
+                @Html.ValidationMessageFor(reg => reg.LastName, "", new {  style = "position:absolute; margin-left:76%; margin-top:6.5%; color:red" })
+
+            </tr>
+            <tr>
+                <th style="background-color:Highlight;">Gender</th>
+                <td>
+                    @Html.RadioButtonFor(reg => reg.Gender, "Male")Male
+                    @Html.RadioButtonFor(reg => reg.Gender, "female")Female
+                    @Html.RadioButtonFor(reg => reg.Gender, "other")Other
+                </td>
+                @Html.ValidationMessageFor(reg => reg.Gender, "", new {  style = "position:absolute; margin-left:76%; margin-top:8.5%; color:red" })
+
+            </tr>
+            <tr>
+                <th style="background-color:Highlight;">Date Of Birth</th>
+                <td><input type="date" name="BirthDate" value="" /></td>
+                @Html.ValidationMessageFor(reg => reg.BirthDate, "", new {  style = "position:absolute; margin-left:76%; margin-top:11%; color:red" })
+
+            </tr>
+
+            @if (Session["user"] == null)
+            {
+                <tr>
+                    <th style="background-color:Highlight;">Role</th>
+                    <td>
+                        @Html.RadioButtonFor(reg => reg.RoleID, 1, new { id = "Admin" })Admin
+                        @Html.RadioButtonFor(reg => reg.RoleID, 3, new { id = "Patient" })Patient
+                        @*@Html.RadioButtonFor(reg => reg.RoleID, 2, new { id = "Doctor" })Doctor*@
+                    </td>
+                    @Html.ValidationMessageFor(reg => reg.RoleID, "", new {  style = "position:absolute; margin-left:76%; margin-top:12.5%; color:red" })
+
+                </tr>
+            }
+            else if (Session["RoleID"].ToString().Equals("1"))
+            {
+
+                <tr>
+                    <th style="background-color:Highlight;">Role</th>
+                    <td>
+                        @Html.RadioButtonFor(reg => reg.RoleID, 1, new { id = "Admin" })Admin
+                        @Html.RadioButtonFor(reg => reg.RoleID, 3, new { id = "Patient" })Patient
+                        @Html.RadioButtonFor(reg => reg.RoleID, 2, new { id = "Doctor" })Doctor
+                    </td>
+                    @Html.ValidationMessageFor(reg => reg.RoleID, "", new {  style = "position:absolute; margin-left:76%; margin-top:12.5%; color:red" })
+
+                </tr>
+            }
+
+
+            <tr>
+                <th style="background-color:Highlight;">Email</th>
+                <td>@Html.TextBoxFor(reg => reg.Email, new { Style = "width:98% ; height:26px" })</td>
+                @Html.ValidationMessageFor(reg => reg.Email, "", new {  style = "position:absolute; margin-left:76%; margin-top:15%; color:red" })
+
+            </tr>
+            <tr id="specialization">
+                <th style="background-color:Highlight;">@Html.LabelFor(reg => reg.Specialization, new { id = "specialization" })</th>
+                <td>
+                    @Html.DropDownListFor(reg => reg.Specialization,
+                                   new List<SelectListItem> {
+
+                                                                   new SelectListItem(){Text="-- select --",Value="Null" },
+                                                                   new SelectListItem() {Text="Allergist",Value="Allergist" },
+                                                                   new SelectListItem() { Text="Immunologist",Value="Immunologist"},
+                                                                   new SelectListItem() { Text="Cardiologist",Value="Cardiologist"},
+                                                                   new SelectListItem() {Text="Dermatologist",Value="Dermatologist" },
+                                                                   new SelectListItem() { Text="Hematologist",Value="Hematologist"},
+                                                                   new SelectListItem() { Text="Hepatologist",Value="Hepatologist"}
+                                 }, new { Style = "width:98% ; height:26px" })
+                </td>
+            </tr>
+            <tr id="availability">
+                <th style="background-color:Highlight">@Html.LabelFor(reg => reg.Availability)</th>
+                <td>
+                    @Html.DropDownListFor(reg => reg.Availability,
+                                new List<SelectListItem> {
+                                                           new SelectListItem() { Text ="-- select --",Value="null" },
+                                                              new SelectListItem() {Text="09:00 A.M-11:00 A.M",Value="09:00 A.M-11:00 A.M" },
+                                                               new SelectListItem() { Text="10:00 A.M-12:00 A.M",Value="10:00 A.M-12:00 A.M"},
+                                                                new SelectListItem() { Text="03:00 P.M-05:00 P.M",Value="03:00 P.M-05:00 P.M"},
+                                                                 new SelectListItem() {Text="05:00 P.M-07:00 P.M",Value="05:00 P.M-07:00 P.M" },
+                                                                  new SelectListItem() { Text="07:00 P.M-09:00 P.M",Value="07:00 P.M-09:00 P.M"}
+                                }, new { Style = "width:98% ; height:26px" })
+                </td>
+            </tr>
+
+            <tr>
+                <th style="background-color:Highlight;">Password</th>
+                <td>@Html.TextBoxFor(reg => reg.tblUser.Password, new { Style = "width:98% ; height:26px", Type = "password" })</td>
+                @Html.ValidationMessageFor(reg => reg.tblUser.Password, "", new {  style = "position:absolute; margin-left:76%; margin-top:17.5%; color:red" })
+
+            </tr>
+            <tr>
+                <th style="background-color:Highlight;">Confirm Password</th>
+                <td>@Html.TextBoxFor(reg => reg.tblUser.Password, new { Style = "width:98% ; height:26px", Type = "password" })</td>
+                @Html.ValidationMessageFor(reg => reg.tblUser.Password, "", new {  style = "position:absolute; margin-left:76%; margin-top:19.5%; color:red" })
+
+            </tr>
+            <tr>
+                <th style="background-color:Highlight">Mobile Number</th>
+                <td>@Html.TextBoxFor(reg => reg.MobileNumber, new { Style = "width:98% ; height:26px" })</td>
+                @Html.ValidationMessageFor(reg => reg.MobileNumber, "", new { style = "position:absolute; margin-left:76%; margin-top:21.5%; color:red" })
+
+            </tr>
+            <tr id="age">
+                <th style="background-color:Highlight;">@Html.LabelFor(reg => reg.Age)</th>
+                <td>@Html.TextBoxFor(reg => reg.Age, new { Style = "width:98% ; height:26px" })</td>
+
+            </tr>
+            <tr style="background-color:Highlight">
+                <th colspan="2" style="padding-left:250px"><input type="submit" value="Submit" id="register" style="font-weight:bold;height:30px ;border:none;background-color:midnightblue;color:white;border-radius:2px; width:80px;  " /></th>
+            </tr>
+
+        </table>
+
+
+    </form>
+</div>
+@if (Convert.ToString(TempData["registered"]).Equals("success"))
+{
+    <div id="dialog" style="position:absolute; border-radius:3px; margin-top:-25%; margin-left:78%; height:60px; width:270px; background-color:cornflowerblue;">
+        <p style="position:absolute;color:white; font-size:20px; margin-left:15%; ">Registration Successful.!!</p>
+    </div>
+}
+
+@if (Convert.ToString(TempData["registered"]).Equals("error"))
+
+{
+    <div id="dialog" style="position:absolute; border-radius:3px; margin-top:-25%; margin-left:78%; height:60px; width:270px; background-color:cornflowerblue;opacity:0.8;">
+        <p style="position:absolute;color:white; font-size:18px; margin-left:15%;margin-top:3.5%; ">Some error has occured.!! <br /> Please try again</p>
+    </div>
+}
+
+@if (Convert.ToString(TempData["registered"]).Equals("duplicate"))
+
+{
+    <div id="dialog" style="position:absolute; border-radius:3px; margin-top:-25%; margin-left:78%; height:60px; width:270px; background-color:cornflowerblue;opacity:0.8;">
+        <p style="position:absolute;color:white; font-size:18px; margin-left:15%;margin-top:3.5%; ">Email ID Already Exists!!<br />Please try Again</p>
+    </div>
+}

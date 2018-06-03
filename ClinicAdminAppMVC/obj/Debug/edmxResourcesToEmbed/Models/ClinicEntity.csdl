@@ -1,0 +1,346 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ClinicAdminAppMVCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tblAppointment">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PatientID" Type="Int32" />
+    <Property Name="DoctorID" Type="Int32" />
+    <Property Name="AppointmentDate" Type="DateTime" Precision="3" />
+    <Property Name="Diagonasis" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="Remarks" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="IsDelete" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblLog">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="Token" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IPAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MACAdderss" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LoggedIn" Type="DateTime" Precision="3" />
+    <Property Name="LoggedOut" Type="DateTime" Precision="3" />
+    <Property Name="Remarks" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RoleID" Type="Int32" />
+    <NavigationProperty Name="tblUser" Relationship="Self.log_fk" FromRole="tblLog" ToRole="tblUsers" />
+  </EntityType>
+  <EntityType Name="tblRegister">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleID" Type="Int32" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Gender" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="MobileNumber" Type="Int64" />
+    <Property Name="BirthDate" Type="DateTime" Precision="0" />
+    <Property Name="Availability" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Specialization" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="IsDelete" Type="Boolean" />
+    <Property Name="Age" Type="Int32" />
+    <NavigationProperty Name="tblUser" Relationship="Self.register_fk" FromRole="tblRegister" ToRole="tblUsers" />
+  </EntityType>
+  <EntityType Name="tblrole">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Remarks" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="IsDelete" Type="Boolean" />
+    <NavigationProperty Name="tblUsers" Relationship="Self.users_fk" FromRole="tblroles" ToRole="tblUsers" />
+  </EntityType>
+  <EntityType Name="tblUser">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleID" Type="Int32" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="IsDelete" Type="Boolean" />
+    <NavigationProperty Name="tblLogs" Relationship="Self.log_fk" FromRole="tblUsers" ToRole="tblLog" />
+    <NavigationProperty Name="tblRegisters" Relationship="Self.register_fk" FromRole="tblUsers" ToRole="tblRegister" />
+    <NavigationProperty Name="tblrole" Relationship="Self.users_fk" FromRole="tblUsers" ToRole="tblroles" />
+  </EntityType>
+  <Association Name="log_fk">
+    <End Role="tblUsers" Type="Self.tblUser" Multiplicity="0..1" />
+    <End Role="tblLog" Type="Self.tblLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUsers">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblLog">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="register_fk">
+    <End Role="tblUsers" Type="Self.tblUser" Multiplicity="0..1" />
+    <End Role="tblRegister" Type="Self.tblRegister" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUsers">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblRegister">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="users_fk">
+    <End Role="tblroles" Type="Self.tblrole" Multiplicity="0..1" />
+    <End Role="tblUsers" Type="Self.tblUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblroles">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblUsers">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ClinicAdminAppMVCEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="tblAppointments" EntityType="Self.tblAppointment" />
+    <EntitySet Name="tblLogs" EntityType="Self.tblLog" />
+    <EntitySet Name="tblRegisters" EntityType="Self.tblRegister" />
+    <EntitySet Name="tblroles" EntityType="Self.tblrole" />
+    <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
+    <AssociationSet Name="log_fk" Association="Self.log_fk">
+      <End Role="tblUsers" EntitySet="tblUsers" />
+      <End Role="tblLog" EntitySet="tblLogs" />
+    </AssociationSet>
+    <AssociationSet Name="register_fk" Association="Self.register_fk">
+      <End Role="tblUsers" EntitySet="tblUsers" />
+      <End Role="tblRegister" EntitySet="tblRegisters" />
+    </AssociationSet>
+    <AssociationSet Name="users_fk" Association="Self.users_fk">
+      <End Role="tblroles" EntitySet="tblroles" />
+      <End Role="tblUsers" EntitySet="tblUsers" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(ClinicAdminAppMVCModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(ClinicAdminAppMVCModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="spRegister">
+      <Parameter Name="roleid" Mode="In" Type="Int32" />
+      <Parameter Name="fname" Mode="In" Type="String" />
+      <Parameter Name="lname" Mode="In" Type="String" />
+      <Parameter Name="email" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+      <Parameter Name="gender" Mode="In" Type="String" />
+      <Parameter Name="mobile" Mode="In" Type="Int32" />
+      <Parameter Name="birthdate" Mode="In" Type="DateTime" />
+      <Parameter Name="availability" Mode="In" Type="String" />
+      <Parameter Name="specialization" Mode="In" Type="String" />
+      <Parameter Name="age" Mode="In" Type="Int32" />
+      <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+      <Parameter Name="IsDelete" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="spSignIn" ReturnType="Collection(ClinicAdminAppMVCModel.spSignIn_Result)">
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="spEmail" ReturnType="Collection(ClinicAdminAppMVCModel.spEmail_Result)">
+      <Parameter Name="Email" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="spDocDrop" ReturnType="Collection(ClinicAdminAppMVCModel.spDocDrop_Result)">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="spPatDrop" ReturnType="Collection(ClinicAdminAppMVCModel.spPatDrop_Result)">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="spDocDetails" ReturnType="Collection(ClinicAdminAppMVCModel.spDocDetails_Result)">
+      <Parameter Name="RoleID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="spPatientDetails" ReturnType="Collection(ClinicAdminAppMVCModel.spPatientDetails_Result)">
+      <Parameter Name="RoleID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="spPatientDetals" ReturnType="Collection(ClinicAdminAppMVCModel.spPatientDetals_Result)">
+      <Parameter Name="RoleID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="spAppointment">
+      <Parameter Name="PatientID" Mode="In" Type="Int32" />
+      <Parameter Name="DoctorID" Mode="In" Type="Int32" />
+      <Parameter Name="AppointmentDate" Mode="In" Type="DateTime" />
+      <Parameter Name="Diagonasis" Mode="In" Type="String" />
+      <Parameter Name="Remarks" Mode="In" Type="String" />
+      <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+      <Parameter Name="IsDelete" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <EntitySet Name="viewAppointmentDocs" EntityType="ClinicAdminAppMVCModel.viewAppointmentDoc" />
+    <FunctionImport Name="spDocInfo" ReturnType="Collection(ClinicAdminAppMVCModel.spDocInfo_Result)">
+      <Parameter Name="DoctorID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="viewAppointmentPats" EntityType="ClinicAdminAppMVCModel.viewAppointmentPat" />
+    <FunctionImport Name="spPatInfo" ReturnType="Collection(ClinicAdminAppMVCModel.spPatInfo_Result)">
+      <Parameter Name="PatientID" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="spSignIn_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="Int32" Name="RoleID" Nullable="true" />
+    <Property Type="Int32" Name="UserID" Nullable="true" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Gender" Nullable="true" MaxLength="20" />
+    <Property Type="Int64" Name="MobileNumber" Nullable="true" />
+    <Property Type="DateTime" Name="BirthDate" Nullable="true" />
+    <Property Type="String" Name="Availability" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Specialization" Nullable="true" MaxLength="50" />
+    <Property Type="Boolean" Name="IsActive" Nullable="true" />
+    <Property Type="Boolean" Name="IsDelete" Nullable="true" />
+    <Property Type="Int32" Name="Age" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="spEmail_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="Int32" Name="RoleID" Nullable="true" />
+    <Property Type="Int32" Name="UserID" Nullable="true" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Gender" Nullable="true" MaxLength="20" />
+    <Property Type="Int64" Name="MobileNumber" Nullable="true" />
+    <Property Type="DateTime" Name="BirthDate" Nullable="true" />
+    <Property Type="String" Name="Availability" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Specialization" Nullable="true" MaxLength="50" />
+    <Property Type="Boolean" Name="IsActive" Nullable="true" />
+    <Property Type="Boolean" Name="IsDelete" Nullable="true" />
+    <Property Type="Int32" Name="Age" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="spDocDrop_Result">
+    <Property Type="Int32" Name="UserID" Nullable="true" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="spPatDrop_Result">
+    <Property Type="Int32" Name="UserID" Nullable="true" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="spDocDetails_Result">
+    <Property Type="Int32" Name="UserID" Nullable="true" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="spPatientDetails_Result">
+    <Property Type="Int32" Name="UserID" Nullable="true" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="spPatientDetals_Result">
+    <Property Type="Int32" Name="UserID" Nullable="true" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="20" />
+  </ComplexType>
+  <EntityType Name="viewAppointmentDoc">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Doctorname" Type="String" MaxLength="41" FixedLength="false" Unicode="false" />
+    <Property Name="DoctorID" Type="Int32" />
+    <Property Name="PatientID" Type="Int32" />
+    <Property Name="specialization" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="availability" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AppointmentDate" Type="DateTime" Precision="3" />
+    <Property Name="PatientName" Type="String" MaxLength="41" FixedLength="false" Unicode="false" />
+    <Property Name="Diagonasis" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="Remarks" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <ComplexType Name="spDocInfo_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Doctorname" Nullable="true" MaxLength="41" />
+    <Property Type="Int32" Name="DoctorID" Nullable="true" />
+    <Property Type="Int32" Name="PatientID" Nullable="true" />
+    <Property Type="String" Name="specialization" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="availability" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="AppointmentDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="PatientName" Nullable="true" MaxLength="41" />
+    <Property Type="String" Name="Diagonasis" Nullable="true" MaxLength="300" />
+    <Property Type="String" Name="Remarks" Nullable="true" MaxLength="300" />
+  </ComplexType>
+  <EntityType Name="viewAppointmentPat">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="PatientName" Type="String" MaxLength="41" FixedLength="false" Unicode="false" />
+    <Property Name="PatientID" Type="Int32" />
+    <Property Name="DoctorID" Type="Int32" />
+    <Property Name="Diagonasis" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="Remarks" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="Doctorname" Type="String" MaxLength="41" FixedLength="false" Unicode="false" />
+    <Property Name="Specialization" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Availability" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <ComplexType Name="spPatInfo_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="PatientName" Nullable="true" MaxLength="41" />
+    <Property Type="Int32" Name="PatientID" Nullable="true" />
+    <Property Type="Int32" Name="DoctorID" Nullable="true" />
+    <Property Type="String" Name="Diagonasis" Nullable="true" MaxLength="300" />
+    <Property Type="String" Name="Remarks" Nullable="true" MaxLength="300" />
+    <Property Type="String" Name="Doctorname" Nullable="true" MaxLength="41" />
+    <Property Type="String" Name="Specialization" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Availability" Nullable="true" MaxLength="50" />
+  </ComplexType>
+</Schema>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fc235aea4f8d4ba8be86d9812d31fc90" Name="Diagram1">
+        <EntityTypeShape EntityType="ClinicAdminAppMVCModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicAdminAppMVCModel.tblAppointment" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicAdminAppMVCModel.tblLog" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicAdminAppMVCModel.tblRegister" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicAdminAppMVCModel.tblrole" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicAdminAppMVCModel.tblUser" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicAdminAppMVCModel.viewAppointmentDoc" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicAdminAppMVCModel.viewAppointmentPat" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="ClinicAdminAppMVCModel.log_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicAdminAppMVCModel.register_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicAdminAppMVCModel.users_fk" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ClinicAdminAppMVCModel.viewAppointmentPat1" Width="1.5" PointX="7.375" PointY="8.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

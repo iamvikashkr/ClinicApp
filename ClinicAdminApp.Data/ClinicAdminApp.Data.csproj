@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3917A979-A93A-4FF5-831D-880E6A31683B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ClinicAdminApp.Data</RootNamespace>
+    <AssemblyName>ClinicAdminApp.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class1.cs" />
+    <Compile Include="Models\ClinicEntity.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClinicEntity.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ClinicEntity.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClinicEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ClinicEntity.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClinicEntity.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\viewAppointmentPat1.cs">
+      <DependentUpon>ClinicEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Models\spDocDetails_Result.cs">
+      <DependentUpon>ClinicEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spDocDrop_Result.cs">
+      <DependentUpon>ClinicEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spDocInfo_Result.cs">
+      <DependentUpon>ClinicEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spEmail_Result.cs">
+      <DependentUpon>ClinicEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spPatDrop_Result.cs">
+      <DependentUpon>ClinicEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spPatientDetails_Result.cs">
+      <DependentUpon>ClinicEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spPatientDetals_Result.cs">
+      <DependentUpon>ClinicEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spPatInfo_Result.cs">
+      <DependentUpon>ClinicEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spSignIn_Result.cs">
+      <DependentUpon>ClinicEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>ClinicEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>ClinicEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>ClinicEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblAppointment.cs">
+      <DependentUpon>ClinicEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblLog.cs">
+      <DependentUpon>ClinicEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblRegister.cs">
+      <DependentUpon>ClinicEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblrole.cs">
+      <DependentUpon>ClinicEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblUser.cs">
+      <DependentUpon>ClinicEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\viewAppointmentDoc.cs">
+      <DependentUpon>ClinicEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\viewAppointmentPat.cs">
+      <DependentUpon>ClinicEntity.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Models\ClinicEntity.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ClinicEntity.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="Models\ClinicEntity.edmx.diagram">
+      <DependentUpon>ClinicEntity.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\ClinicEntity.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ClinicEntity.Context.cs</LastGenOutput>
+      <DependentUpon>ClinicEntity.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\ClinicEntity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ClinicEntity.edmx</DependentUpon>
+      <LastGenOutput>ClinicEntity.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

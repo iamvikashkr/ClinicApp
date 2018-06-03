@@ -1,0 +1,132 @@
+﻿@model ClinicAdminAppMVC.Models.Signin
+
+@{
+    Layout = "~/Views/Shared/Clinicmaster.cshtml";
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+
+        $("#btnsign").on('click', function () {
+            $("#dialog").css("display", "normal");
+        })
+
+        $("#register").on('click', function () {
+            $("#dialog").css("display", "normal");
+        })
+
+        $('#dialog').delay(2000).fadeOut();
+
+    });
+</script>
+<div  style="margin-top:50px">
+    <form name="sign_form" method="post">
+        <table border="0" style="border:ridge; width:40%; margin:auto">
+            <tr style="height:50px; background-color:cornflowerblue ; font-size:30px">
+                <th colspan="2" style="padding-left:200px">Sign In</th>
+            </tr>
+            <tr>
+                <th style="background-color:Highlight;">@Html.LabelFor(sign => sign.Email)</th>
+                <td>@Html.TextBoxFor(sign => sign.Email, new { Style = "width:98%; height:30px", Placeholder = "User Name" })</td>
+                @Html.ValidationMessageFor(sign => sign.Email, "", new { style = "position:absolute; margin-left:76%; margin-top:4.5%; color:red" })
+            </tr>
+            <tr>
+                <th style="background-color:Highlight;">@Html.LabelFor(sign => sign.Password)</th>
+                <td>@Html.TextBoxFor(sign => sign.Password, new { Style = "width:98%; height:30px", Placeholder = "Password", Type = "Password" })</td>
+                @Html.ValidationMessageFor(sign => sign.Password, "", new { style = "position:absolute; margin-left:76%; margin-top:6.5%; color:red" })
+
+            </tr>
+            <tr style="background-color:Highlight">
+                <td style="padding-left:8px;">@Html.ActionLink("Forgot Password?", "ForgotPassword", "Account")</td>
+
+                <td colspan="2"><input type="submit" id="btnsign" value="LogIn" style="font-weight:bold;height:30px ;border:none;background-color:midnightblue;color:white;border-radius:2px; width:80px" /></td>
+            </tr>
+        </table>
+
+    </form>
+</div>
+
+
+
+@if (Convert.ToString(TempData["signin"]).Equals("error"))
+
+{
+    <div id="dialog" style="position:absolute; border-radius:3px; margin-top:-10%; margin-left:78%; height:60px; width:270px; background-color:cornflowerblue;opacity:0.8;">
+        <p style="position:absolute;color:white; font-size:18px; margin-left:15%;margin-top:3.5%; ">User is not Present.!! <br /> Please try again</p>
+    </div>
+}
+
+@if (Convert.ToString(TempData["signin"]).Equals("false"))
+
+{
+    <div id="dialog" style="position:absolute; border-radius:3px; margin-top:-15%; margin-left:78%; height:60px; width:270px; background-color:cornflowerblue;opacity:0.8;">
+        <p style="position:absolute;color:white; font-size:18px; margin-left:15%;margin-top:3.5%; ">Email or Password not Valid.!! <br /> Please try again</p>
+    </div>
+}
+
+@if (Convert.ToString(TempData["registered"]).Equals("success"))
+{
+    <div id="dialog" style="position:absolute; border-radius:3px; margin-top:-10%; margin-left:78%; height:60px; width:270px; background-color:cornflowerblue;">
+        <p style="position:absolute;color:white; font-size:20px; margin-left:15%; ">Registration Successful.!!</p>
+    </div>
+}
+
+@if (Convert.ToString(TempData["registered"]).Equals("error"))
+
+{
+    <div id="dialog" style="position:absolute; border-radius:3px; margin-top:25%; margin-left:78%; height:60px; width:270px; background-color:cornflowerblue;opacity:0.8;">
+        <p style="position:absolute;color:white; font-size:18px; margin-left:15%;margin-top:3.5%; ">Some error has occured.!! <br /> Please try again</p>
+    </div>
+}
+
+@if (Convert.ToString(TempData["registered"]).Equals("duplicate"))
+
+{
+    <div id="dialog" style="position:absolute; border-radius:3px; margin-top:15%; margin-left:78%; height:60px; width:270px; background-color:cornflowerblue;opacity:0.8;">
+        <p style="position:absolute;color:white; font-size:18px; margin-left:15%;margin-top:3.5%; ">This Email is already<br />Registered.Please try another</p>
+    </div>
+}
+
+
+@if (Convert.ToString(TempData["signout"]).Equals("success"))
+
+{
+    <div id="dialog" style="position:absolute; border-radius:3px; margin-top:-10%; margin-left:78%; height:60px; width:270px; background-color:cornflowerblue;opacity:0.8;">
+        <p style="position:absolute;color:white; font-size:18px; margin-left:15%;margin-top:3.5%; ">Sign Out Successfull</p>
+    </div>
+}
+
+@if (Convert.ToString(TempData["msg"]).Equals("success"))
+
+{
+    <div id="dialog" style="position:absolute; border-radius:3px; margin-top:-15%; margin-left:78%; height:60px; width:270px; background-color:cornflowerblue;opacity:0.8;">
+        <p style="position:absolute;color:white; font-size:18px; margin-left:15%;margin-top:3.5%; ">Password sent to Registered Email ID</p>
+    </div>
+}
+
+@if (Convert.ToString(TempData["msg"]).Equals("error"))
+
+{
+    <div id="dialog" style="position:absolute; border-radius:3px; margin-top:-15%; margin-left:78%; height:60px; width:270px; background-color:cornflowerblue;opacity:0.8;">
+        <p style="position:absolute;color:white; font-size:18px; margin-left:15%;margin-top:3.5%; ">Invalid Email ID</p>
+    </div>
+}
+
+@if (Convert.ToString(TempData["edit"]).Equals("success"))
+
+{
+    <div id="dialog" style="position:absolute; border-radius:3px; margin-top:-10%; margin-left:78%; height:60px; width:270px; background-color:cornflowerblue;opacity:0.8;">
+        <p style="position:absolute;color:white; font-size:18px; margin-left:15%;margin-top:3.5%; ">Profile Updated</p>
+    </div>
+}
+
+@if (Convert.ToString(TempData["edit"]).Equals("error"))
+
+{
+    <div id="dialog" style="position:absolute; border-radius:3px; margin-top:-15%; margin-left:78%; height:60px; width:270px; background-color:cornflowerblue;opacity:0.8;">
+        <p style="position:absolute;color:white; font-size:18px; margin-left:15%;margin-top:3.5%; ">Error Updating Profile</p>
+    </div>
+}
+
+

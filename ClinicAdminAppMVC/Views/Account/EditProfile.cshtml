@@ -1,0 +1,32 @@
+﻿@model ClinicAdminAppMVC.Models.Register
+
+@{
+    Layout = "~/Views/Shared/Clinicmaster.cshtml";
+}
+
+<div style="margin-top:50px">
+    <form name="reg_form" method="post">
+
+        <table border="0" style="border:solid darkslateblue; width:40% ;margin:auto">
+            <tr style="background-color:cornflowerblue; height:50px; font-size:30px">
+                <th colspan="2">Edit Profile</th>
+            </tr>
+            <tr>
+                <th style="background-color:Highlight;">First Name</th>
+                <td>@Html.TextBoxFor(reg => reg.fname, new { Style = "width:98% ; height:22px" })</td>
+            </tr>
+            <tr>
+                <th style="background-color:Highlight;">Last Name</th>
+                <td>@Html.TextBoxFor(reg => reg.lname, new { Style = "width:98% ; height:22px" })</td>
+            </tr>
+            <tr>
+                <th style="background-color:Highlight;">Password</th>
+                <td>@Html.TextBoxFor(reg => reg.password, new { Style = "width:98% ; height:22px", Type = "password" })</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="padding-left:220px"><input type="submit" id="edit" value="Update" style="font-weight:bold;height:30px ;border:none;background-color:midnightblue;color:white;border-radius:2px; width:80px" /></td>
+
+            </tr>
+        </table>
+    </form>
+</div>

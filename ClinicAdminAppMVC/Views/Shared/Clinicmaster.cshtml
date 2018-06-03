@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@ViewBag.Title My App</title>
+    <link href="~/StyleSheet/layout.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    @if (Session["user"] == null)
+    {
+        <div  class="navbar-fixed-top" style="background-color:lightskyblue;color:black;width:100%;height:65px; font-size:25px;">
+            <label style="margin-right:800px; font-size:xx-large ;font-weight:900; padding-left:10px;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Clinic Admin App</label>
+            @Html.ActionLink("Home", "Home", "Account")
+            @Html.ActionLink("SignIn", "SignIn", "Account")
+            @Html.ActionLink("Register", "Register", "Account")
+        </div>
+    }
+    else if (Session["user"] != null)
+    {
+        if (Convert.ToString(Session["RoleID"]) == "1")
+        {
+            <div class=" navbar-fixed-top" style="text-decoration:none;background-color:lightskyblue;color:black;width:100%;height:65px; font-size:25px;">
+                <label style="text-decoration:none !important; margin-right:500px; font-size:xx-large ;font-weight:900; padding-left:10px ;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Clinic Admin App</label>
+                @Html.ActionLink("Home", "Profile", "Account")
+                @Html.ActionLink("Register", "Register", "Account")
+                @Html.ActionLink("Appointment", "Appointment", "Clinic")
+                @Html.ActionLink("Doctor", "Doctor", "Clinic")
+                @Html.ActionLink("Patient", "Patient", "Clinic")
+                @Html.ActionLink("SignOut", "Signout", "Account")
+            </div>
+        }
+        else if (Convert.ToString(Session["RoleID"]) == "2")
+        {
+            <div class=" navbar-fixed-top" style="text-decoration:none;background-color:lightskyblue;color:black;width:100%;height:65px; font-size:25px;">
+                <label style="text-decoration:none !important; margin-right:800px; font-size:xx-large ;font-weight:900; padding-left:10px;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Clinic Admin App</label>
+                @Html.ActionLink("Home", "Profile", "Account")
+                @Html.ActionLink("Doctor", "Doctor", "Clinic")
+                @Html.ActionLink("SignOut", "Signout", "Account")
+            </div>
+        }
+        else if (Convert.ToString(Session["RoleID"]) == "3")
+        {
+            <div class=" navbar-fixed-top" style="text-decoration:none;background-color:lightskyblue;color:black;width:100%;height:65px; font-size:25px;">
+                <label style="text-decoration:none !important; margin-right:800px; font-size:xx-large ;font-weight:900; padding-left:10px;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Clinic Admin App</label>
+                @Html.ActionLink("Home", "Profile", "Account")
+                @Html.ActionLink("Patient", "Patient", "Clinic")
+                @Html.ActionLink("SignOut", "Signout", "Account")
+            </div>
+        }
+    }
+
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>

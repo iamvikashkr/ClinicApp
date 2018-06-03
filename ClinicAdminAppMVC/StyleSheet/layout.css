@@ -1,0 +1,36 @@
+﻿.header {
+    padding-left: 400px;
+    text-decoration: none;
+    color: black;
+    padding: 14px 16px;
+    text-decoration:none;
+}
+
+.grid {
+    background-color: Highlight;
+}
+
+
+.label {
+    text-decoration:none;
+
+}
+
+
+.topnav {
+    overflow: hidden;
+    background-color: darkseagreen;
+    height: 50px;
+}
+
+.success-dialog {
+    background-color: green;
+    color: white;
+    padding: 15px 0 0 40px;
+    width: 200px;
+    height: 68px;
+    opacity: 0.65;
+    align-content: flex-start;
+    margin-left: 495px;
+    margin-top: -64px;
+}

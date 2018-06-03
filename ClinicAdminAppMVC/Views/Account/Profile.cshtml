@@ -1,0 +1,72 @@
+﻿@{
+    Layout = "~/Views/Shared/Clinicmaster.cshtml";
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+
+        $("#btnsign").on('click', function () {
+            $("#dialog").css("display", "normal");
+        })
+
+
+        $('#dialog').delay(1000).fadeOut();
+
+    });
+</script>
+<div style="margin-top:50px;">
+    <table border="0" style="background-color:Highlight; margin:auto; width:30%;">
+        <tr style="height:50px;font-size:30px; ">
+            <th colspan="2" style="padding-left:150px;">Profile</th>
+        </tr>
+        <tr>
+            <th style="background-color:Highlight;">RoleID</th>
+            <td>@Html.TextBox("RoleID", Convert.ToString(Session["RoleID"]), new { Style = "width:96%; height:29px;font-weight:600 ;padding-left:10px", Placeholder = "RoleID" })</td>
+        </tr>
+        <tr>
+            <th style="background-color:Highlight;">UserID</th>
+            <td>@Html.TextBox("UserID", Convert.ToString(Session["UserID"]), new { Style = "width:96%; height:29px;font-weight:600;padding-left:10px", Placeholder = "UserID" })</td>
+        </tr>
+
+        <tr>
+            <th style="background-color:Highlight;">First Name</th>
+            <td>@Html.TextBox("fname", Convert.ToString(Session["Firstname"]), new { Style = "width:96%; height:29px;font-weight:600;padding-left:10px", Placeholder = "First Name" })</td>
+        </tr>
+        <tr>
+            <th style="background-color:Highlight;">Last Name</th>
+            <td>@Html.TextBox("lname", Convert.ToString(Session["Lastname"]), new { Style = "width:96%; height:29px;font-weight:600;padding-left:10px", Placeholder = "Last Name" })</td>
+        </tr>
+        <tr>
+            <th style="background-color:Highlight;">Email Id</th>
+            <td>@Html.TextBox("email", Convert.ToString(Session["Email"]), new { Style = "width:96%; height:29px;font-weight:600;padding-left:10px", Placeholder = "Email" })</td>
+        </tr>
+        <tr>
+            <th style="background-color:Highlight;">Gender</th>
+            <td>@Html.TextBox("Gender", Convert.ToString(Session["Gender"]), new { Style = "width:96%; height:29px;font-weight:600;padding-left:10px", Placeholder = "Gender" })</td>
+        </tr>
+        <tr>
+            <th style="background-color:Highlight;">BirthDate</th>
+            <td>@Html.TextBox("BirthDate", Convert.ToString(Session["Birthdate"]), new { Style = "width:96%; height:29px;font-weight:600;padding-left:10px", Placeholder = "Birthdate" })</td>
+        </tr>
+        <tr>
+            <th style="background-color:Highlight;">Contact</th>
+            <td>@Html.TextBox("MobileNumber", Convert.ToString(Session["MobileNumber"]), new { Style = "width:96%; height:29px;font-weight:600;padding-left:10px", Placeholder = "MobileNumber" })</td>
+        </tr>
+
+        <tr>
+            <td style="padding-left:8px;">@Html.ActionLink("Edit Profile", "EditProfile", "Account")</td>
+
+        </tr>
+
+    </table>
+</div>
+
+@if (Convert.ToString(TempData["signin"]).Equals("suc"))
+{
+    <div id="dialog" style="position:absolute; border-radius:3px; margin-top:-15%; margin-left:78%; height:60px; width:270px; background-color:cornflowerblue;">
+        <p style="position:absolute;color:white; font-size:20px; margin-left:15%; ">SignIn Successful.!!</p>
+    </div>
+}
+
